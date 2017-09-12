@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/', function ()    {
+        // Uses Auth Middleware
+        return view('welcome');
+    });
+
+    Route::post('/signup', [
+    	'uses' => 'UserController@postSignUp',
+    	'as' =>'signup'
+    ]);
 });
